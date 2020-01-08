@@ -1,0 +1,30 @@
+{
+  "name": "@etalab/communes-locaux",
+  "version": "0.0.0",
+  "repository": "https://github.com/etalab/communes-locaux",
+  "author": "Jérôme Desboeufs <jerome.desboeufs@data.gouv.fr>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "node build",
+    "lint": "xo",
+    "test": "xo"
+  },
+  "dependencies": {
+    "@etalab/decoupage-administratif": "^0.7.0",
+    "@etalab/majic": "^0.7.0",
+    "fs-extra": "^8.1.0",
+    "get-stream": "^5.1.0",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "xo": "^0.25.3"
+  },
+  "xo": {
+    "space": 2,
+    "semicolon": false
+  },
+  "engines": {
+    "node": ">= 10"
+  }
+}
