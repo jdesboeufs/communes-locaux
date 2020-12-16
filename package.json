@@ -11,11 +11,11 @@
     "test": "xo"
   },
   "dependencies": {
-    "@etalab/decoupage-administratif": "^0.7.0",
+    "@etalab/decoupage-administratif": "^0.8.0",
     "@etalab/majic": "^0.7.0",
-    "fs-extra": "^8.1.0",
-    "get-stream": "^5.1.0",
-    "lodash": "^4.17.15"
+    "fs-extra": "^9.0.1",
+    "get-stream": "^6.0.0",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "xo": "^0.25.3"
