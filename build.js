@@ -56,8 +56,7 @@ function eachCommune(commune, locaux) {
 }
 
 async function main() {
-  const communesMoselle = communes.filter(c => c.code.startsWith('57'))
-  const communesLocaux = await bluebird.map(communesMoselle, async commune => {
+  const communesLocaux = await bluebird.map(communes, async commune => {
     const locaux = await getCommuneData(commune.code, {profile: 'simple'})
     const result = eachCommune(commune, locaux)
     console.log(`${commune.code} ${commune.nom} OK!`)
