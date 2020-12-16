@@ -3,13 +3,11 @@ require('dotenv').config()
 
 const {join} = require('path')
 const bluebird = require('bluebird')
-const {chain, keyBy} = require('lodash')
+const {chain, compact} = require('lodash')
 const {outputJson} = require('fs-extra')
 const {getCommuneData} = require('@etalab/majic')
 const communes = require('@etalab/decoupage-administratif/data/communes.json')
   .filter(c => ['arrondissement-municipal', 'commune-actuelle'].includes(c.type))
-
-const communesIndex = keyBy(communes, 'code')
 
 const ACCEPTED_CATEGORIES_LOCAUX = [
   'maison',
@@ -58,13 +56,19 @@ function eachCommune(commune, locaux) {
 async function main() {
   const communesLocaux = await bluebird.map(communes, async commune => {
     const locaux = await getCommuneData(commune.code, {profile: 'simple'})
+
+    if (!locaux || locaux.length === 0) {
+      console.log(`Pas de locaux pour ${commune.nom} (${commune.code})`)
+      return
+    }
+
     const result = eachCommune(commune, locaux)
     console.log(`${commune.code} ${commune.nom} OK!`)
     return result
   }, {concurrency: 5})
 
   const filePath = join(__dirname, 'dist', 'communes-locaux.json')
-  await outputJson(filePath, communesLocaux)
+  await outputJson(filePath, compact(communesLocaux))
 }
 
 main().catch(error => {
